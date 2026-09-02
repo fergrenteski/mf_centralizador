@@ -20,3 +20,11 @@ Por que funciona bem como remote isolado: não depende de nada do "Remote 2" pra
 
 ## APP CENTRAL:
 
+quero que voce crie uma aplicação simples em react js utilizando o module federation host.
+
+duas abas, uma apontando para cada um desses aplicativos, vou subir eles via static apps na azure:
+
+https://kind-beach-0aa0a8510.3.azurestaticapps.net
+https://kind-beach-0aa0a8510.3.azurestaticapps.net
+
+está repetido, mas considere dois
