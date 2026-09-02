@@ -1,3 +1,84 @@
+# Projeto PJBL — Sistema de Atendimento e Fila
+
+## 👥 Integrantes do grupo
+
+•⁠  ⁠Ana Paula Alvez
+•⁠  ⁠Arthur Bertoni
+•⁠  ⁠Bernardo Plottegher
+•⁠  ⁠Luiz Fernando Grenteski
+
+---
+
+## 📌 Descrição do projeto
+
+O projeto foi desenvolvido em grupo como parte da atividade PJBL, utilizando uma arquitetura baseada em *Module Federation*, com aplicações frontend independentes que se comunicam com dados mockados por meio de endpoints HTTP.
+
+A solução possui aplicações independentes (*App 1* e *App 2) que futuramente serão integradas por meio de um **Centralizador/Host*.
+
+As aplicações foram desenvolvidas utilizando *React JS* e publicadas no *Azure Static Web Apps*.
+
+APP1: https://github.com/AnaBeluzzo/mf_portal_recep
+
+APP2: https://github.com/arthurbertoni/mf_consulta_fila.git
+
+APP CENTRAL: https://github.com/fergrenteski/mf_centralizador
+
+---
+
+# 🏗️ Arquitetura
+
+O projeto utiliza *Module Federation*, permitindo que diferentes aplicações frontend sejam desenvolvidas e executadas de forma independente.
+
+# LINKS AZURE
+
+APP1:
+https://thankful-sea-0e69b3a10.7.azurestaticapps.net/
+
+APP2:
+https://lively-ocean-057e5ab10.7.azurestaticapps.net
+
+APP CENTRAL:
+https://gray-water-019d50e10.5.azurestaticapps.net
+
+### FUNCTIONS:
+
+```
+chamarProximoPaciente - [httpTrigger]
+Invoke url: https://zerofilas-fpfwckceggbxfpcs.brazilsouth-01.azurewebsites.net/api/fila/{unidadeid}/chamar-proximo
+
+listarPacientesDaFila - [httpTrigger]
+    Invoke url: https://zerofilas-fpfwckceggbxfpcs.brazilsouth-01.azurewebsites.net/api/fila/{unidadeid}/pacientes
+
+listarUnidadesComFila - [httpTrigger]
+    Invoke url: https://zerofilas-fpfwckceggbxfpcs.brazilsouth-01.azurewebsites.net/api/fila
+```
+
+Estrutura planejada:
+
+```text
+                    ┌──────────────────────┐
+                    │    Centralizador     │
+                    │        Host          │
+                    └──────────┬───────────┘
+                               │
+                  ┌────────────┴────────────┐
+                  │                         │
+                  ▼                         ▼
+        ┌──────────────────┐      ┌──────────────────┐
+        │      App 1       │      │      App 2       │
+        │ Painel Atendente │      │ Consulta de Fila │
+        │     Provider     │      │     Remote 1     │
+        └────────┬─────────┘      └────────┬─────────┘
+                 │                         │
+                 └────────────┬────────────┘
+                              │
+                              ▼
+                    ┌──────────────────┐
+                    │   Mock Backend   │
+                    │  Azure Function  │
+                    │      GET         │
+                    └──────────────────┘
+```
 # MF Principal — Host (Module Federation)
 
 Aplicação React (Webpack 5 Module Federation) que funciona como **host**, com
