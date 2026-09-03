@@ -1,5 +1,7 @@
 # Projeto PJBL — Sistema de Atendimento e Fila
 
+> 🚀 **Como rodar (local e produção), passo a passo:** [`COMO_RODAR.md`](./COMO_RODAR.md)
+
 ## 👥 Integrantes do grupo
 
 •⁠  ⁠Ana Paula Alvez
@@ -52,6 +54,36 @@ listarPacientesDaFila - [httpTrigger]
 listarUnidadesComFila - [httpTrigger]
     Invoke url: https://zerofilas-fpfwckceggbxfpcs.brazilsouth-01.azurewebsites.net/api/fila
 ```
+
+## Backend real (Azure Functions + MongoDB)
+
+O código das Functions está em [`functions/`](./functions) — Node.js v4 (JS) com
+persistência em **MongoDB Atlas** (collection `open-prontuario`). Substitui o mock
+por dados reais e é publicado no Function App **`furafila`**.
+
+Functions disponíveis:
+
+| Método | Rota                                   | Function |
+| ------ | -------------------------------------- | -------- |
+| GET    | `/api/fila`                            | `listarUnidadesComFila` |
+| GET    | `/api/fila/{unidadeId}/pacientes`      | `listarPacientesDaFila` |
+| POST   | `/api/fila/{unidadeId}/chamar-proximo` | `chamarProximoPaciente` |
+| POST   | `/api/fila/{unidadeId}/pacientes`      | `adicionarPacienteNaFila` — **inserir** |
+| GET    | `/api/fila/{unidadeId}/pacientes/{pacienteId}` | `buscarPaciente` — **pesquisar** |
+| PUT    | `/api/fila/{unidadeId}/pacientes/{pacienteId}` | `alterarPaciente` — **alterar** |
+| DELETE | `/api/fila/{unidadeId}/pacientes/{pacienteId}` | `removerPaciente` — **excluir** |
+| POST   | `/api/seed`                            | `seedDados` (popula a collection) |
+
+Subir para o `furafila`:
+
+```bash
+cd functions
+npm install
+func azure functionapp publish furafila
+```
+
+Detalhes de configuração (variáveis de ambiente, seed, Atlas Network Access) em
+[`functions/README.md`](./functions/README.md).
 
 Estrutura planejada:
 

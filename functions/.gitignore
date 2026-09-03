@@ -1,0 +1,10 @@
+# Segredos locais — NUNCA versionar (contém a connection string do Mongo)
+local.settings.json
+
+# Node / Azure Functions
+node_modules/
+bin
+obj
+.python_packages
+__pycache__
+npm-debug.log*

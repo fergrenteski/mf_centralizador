@@ -208,6 +208,126 @@ Usado pelo Painel do Atendente (Remote 2) ao clicar em "Chamar próximo". Em amb
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Paciente chamado com sucesso|[PacienteFila](#schemapacientefila)|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Não há pacientes aguardando nesta unidade|[Erro](#schemaerro)|
 
+<a id="opIdadicionarPacienteNaFila"></a>
+
+## POST Adiciona um paciente à fila de uma unidade
+
+POST /fila/{unidadeId}/pacientes
+
+> ⚠️ Extensão fora do escopo mock original — implementado no backend real
+> (Azure Functions + MongoDB) para permitir enfileirar pacientes pela tela do host.
+
+### Params
+
+|Name|Location|Type|Required|Description|
+|---|---|---|---|---|
+|unidadeId|path|string| yes |Identificador da unidade de saúde (UBS ou UPA)|
+|body|body|object| yes |`{ "nome": string, "prioridade": "normal" \| "urgente" }`|
+
+> Body
+
+```json
+{ "nome": "Maria Souza", "prioridade": "urgente" }
+```
+
+> 201 Response — paciente criado (id e horarioChegada gerados pelo servidor)
+
+```json
+{
+  "id": "pac-mtm52cpk535",
+  "nome": "Maria Souza",
+  "horarioChegada": "2026-09-03T23:10:00.000Z",
+  "prioridade": "urgente"
+}
+```
+
+> 400 Response — nome ausente
+
+```json
+{ "codigo": "NOME_OBRIGATORIO", "mensagem": "O campo \"nome\" é obrigatório." }
+```
+
+> 404 Response — unidade inexistente
+
+```json
+{ "codigo": "UNIDADE_NAO_ENCONTRADA", "mensagem": "Nenhuma unidade encontrada com o id informado." }
+```
+
+### Responses
+
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Paciente adicionado à fila|[PacienteFila](#schemapacientefila)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Corpo inválido / nome ausente|[Erro](#schemaerro)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Unidade não encontrada|[Erro](#schemaerro)|
+
+<a id="opIdbuscarPaciente"></a>
+
+## GET Pesquisa um paciente da fila
+
+GET /fila/{unidadeId}/pacientes/{pacienteId}
+
+### Params
+
+|Name|Location|Type|Required|Description|
+|---|---|---|---|---|
+|unidadeId|path|string| yes |Identificador da unidade|
+|pacienteId|path|string| yes |Identificador do paciente|
+
+> 200 Response
+
+```json
+{ "id": "pac-101", "nome": "Maria Souza", "horarioChegada": "2026-08-27T08:15:00-03:00", "prioridade": "normal" }
+```
+
+### Responses
+
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|200|OK|Paciente encontrado|[PacienteFila](#schemapacientefila)|
+|404|Not Found|Unidade ou paciente não encontrado|[Erro](#schemaerro)|
+
+<a id="opIdalterarPaciente"></a>
+
+## PUT Altera um paciente da fila
+
+PUT /fila/{unidadeId}/pacientes/{pacienteId}
+
+Altera `nome` e/ou `prioridade`. Aceita também `PATCH`.
+
+> Body (campos opcionais; ao menos um)
+
+```json
+{ "nome": "Maria S. Souza", "prioridade": "urgente" }
+```
+
+### Responses
+
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|200|OK|Paciente atualizado|[PacienteFila](#schemapacientefila)|
+|400|Bad Request|Corpo inválido / nada a alterar / prioridade inválida|[Erro](#schemaerro)|
+|404|Not Found|Unidade ou paciente não encontrado|[Erro](#schemaerro)|
+
+<a id="opIdremoverPaciente"></a>
+
+## DELETE Exclui um paciente da fila
+
+DELETE /fila/{unidadeId}/pacientes/{pacienteId}
+
+> 200 Response
+
+```json
+{ "removido": true, "id": "pac-101", "unidadeId": "ubs-01" }
+```
+
+### Responses
+
+|HTTP Status Code |Meaning|Description|Data schema|
+|---|---|---|---|
+|200|OK|Paciente removido|Inline|
+|404|Not Found|Unidade ou paciente não encontrado|[Erro](#schemaerro)|
+
 # Data Schema
 
 <h2 id="tocS_UnidadeSaude">UnidadeSaude</h2>

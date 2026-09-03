@@ -1,0 +1,14 @@
+{
+  "name": "furafila-functions",
+  "version": "1.0.0",
+  "description": "Azure Functions (Node.js v4) da API de Fila de Atendimento UBS/UPA - backend MongoDB do mf_principal",
+  "main": "src/functions/*.js",
+  "scripts": {
+    "start": "func start",
+    "deploy": "func azure functionapp publish furafila"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.5.0",
+    "mongodb": "^6.9.0"
+  }
+}

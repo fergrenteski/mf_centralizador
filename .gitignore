@@ -1,2 +1,10 @@
 node_modules/
 dist/
+
+# variáveis de ambiente locais (mantém apenas o .env.example versionado)
+.env
+.env.local
+.env.*.local
+
+# segredos das functions
+functions/local.settings.json
