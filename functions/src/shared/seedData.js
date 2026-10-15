@@ -76,4 +76,4 @@ function buildSeed() {
   ];
 }
 
-module.exports = { buildSeed };
+export { buildSeed };

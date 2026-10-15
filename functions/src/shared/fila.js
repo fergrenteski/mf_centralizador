@@ -46,7 +46,7 @@ function toPacienteFila(p) {
   };
 }
 
-module.exports = {
+export {
   JSON_HEADERS,
   ok,
   erro,

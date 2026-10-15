@@ -5,10 +5,15 @@
   "main": "src/functions/*.js",
   "scripts": {
     "start": "func start",
-    "deploy": "func azure functionapp publish zerofilas"
+    "deploy": "func azure functionapp publish zerofilas",
+    "test": "node --test"
   },
   "dependencies": {
     "@azure/functions": "^4.5.0",
     "mongodb": "^6.9.0"
-  }
+  },
+  "devDependencies": {
+    "archunit": "^2.5.4"
+  },
+  "type": "module"
 }

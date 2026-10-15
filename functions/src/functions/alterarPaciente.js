@@ -1,8 +1,8 @@
 'use strict';
 
-const { app } = require('@azure/functions');
-const { getCollection } = require('../shared/mongo');
-const { ok, erro, toPacienteFila } = require('../shared/fila');
+import { app } from '@azure/functions';
+import { getCollection } from '../shared/mongo.js';
+import { ok, erro, toPacienteFila } from '../shared/fila.js';
 
 // PUT /api/fila/{unidadeId}/pacientes/{pacienteId}
 // ALTERAR nome e/ou prioridade de um paciente da fila.

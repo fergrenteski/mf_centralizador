@@ -1,8 +1,8 @@
 'use strict';
 
-const { app } = require('@azure/functions');
-const { getCollection } = require('../shared/mongo');
-const { ok, erro, toPacienteFila } = require('../shared/fila');
+import { app } from '@azure/functions';
+import { getCollection } from '../shared/mongo.js';
+import { ok, erro, toPacienteFila } from '../shared/fila.js';
 
 // POST /api/fila/{unidadeId}/pacientes
 // Enfileira um novo paciente na unidade. (Endpoint inferido — não consta no

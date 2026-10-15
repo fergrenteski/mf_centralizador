@@ -1,8 +1,8 @@
 'use strict';
 
-const { app } = require('@azure/functions');
-const { getCollection } = require('../shared/mongo');
-const { ok, erro, toUnidadeSaude } = require('../shared/fila');
+import { app } from '@azure/functions';
+import { getCollection } from '../shared/mongo.js';
+import { ok, erro, toUnidadeSaude } from '../shared/fila.js';
 
 // GET /api/fila
 // Lista as unidades de saúde com o status atual da fila (tamanho + tempo médio).

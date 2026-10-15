@@ -1,6 +1,6 @@
 'use strict';
 
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
 // O MongoClient é reaproveitado entre invocações da mesma instância "quente" da
 // Function (variáveis de módulo persistem), evitando reconectar a cada request.
@@ -35,4 +35,4 @@ async function getCollection() {
   return client.db(dbName).collection(collName);
 }
 
-module.exports = { getClient, getCollection };
+export { getClient, getCollection };

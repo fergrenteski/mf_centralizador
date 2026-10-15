@@ -1,8 +1,8 @@
 'use strict';
 
-const { app } = require('@azure/functions');
-const { getCollection } = require('../shared/mongo');
-const { ok, erro, ordenarFila, toPacienteFila } = require('../shared/fila');
+import { app } from '@azure/functions';
+import { getCollection } from '../shared/mongo.js';
+import { ok, erro, ordenarFila, toPacienteFila } from '../shared/fila.js';
 
 // POST /api/fila/{unidadeId}/chamar-proximo
 // Seleciona o próximo paciente (urgentes primeiro, depois ordem de chegada),

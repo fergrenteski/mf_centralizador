@@ -1,8 +1,8 @@
 'use strict';
 
-const { app } = require('@azure/functions');
-const { getCollection } = require('../shared/mongo');
-const { ok, erro } = require('../shared/fila');
+import { app } from '@azure/functions';
+import { getCollection } from '../shared/mongo.js';
+import { ok, erro } from '../shared/fila.js';
 
 // DELETE /api/fila/{unidadeId}/pacientes/{pacienteId}
 // EXCLUIR um paciente da fila de uma unidade.

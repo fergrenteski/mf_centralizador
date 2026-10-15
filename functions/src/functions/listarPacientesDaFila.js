@@ -1,8 +1,8 @@
 'use strict';
 
-const { app } = require('@azure/functions');
-const { getCollection } = require('../shared/mongo');
-const { ok, erro, ordenarFila, toPacienteFila } = require('../shared/fila');
+import { app } from '@azure/functions';
+import { getCollection } from '../shared/mongo.js';
+import { ok, erro, ordenarFila, toPacienteFila } from '../shared/fila.js';
 
 // GET /api/fila/{unidadeId}/pacientes
 // Lista os pacientes aguardando atendimento em uma unidade, na ordem da fila.

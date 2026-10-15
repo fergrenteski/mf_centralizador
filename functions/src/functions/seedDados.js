@@ -1,9 +1,9 @@
 'use strict';
 
-const { app } = require('@azure/functions');
-const { getCollection } = require('../shared/mongo');
-const { ok, erro } = require('../shared/fila');
-const { buildSeed } = require('../shared/seedData');
+import { app } from '@azure/functions';
+import { getCollection } from '../shared/mongo.js';
+import { ok, erro } from '../shared/fila.js';
+import { buildSeed } from '../shared/seedData.js';
 
 // POST /api/seed
 // Popula a collection `open-prontuario` com dados realistas (limpa antes).
